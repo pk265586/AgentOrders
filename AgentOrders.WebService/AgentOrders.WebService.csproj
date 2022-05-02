@@ -89,6 +89,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\ListByMinOrdersResponseModel.cs" />
+    <Compile Include="Models\OrdersByIndexRequestModel.cs" />
+    <Compile Include="Models\OrdersByIndexResponseModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -102,7 +105,16 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AgentOrders.Domain\AgentOrders.Domain.csproj">
+      <Project>{4b8ffc59-b5c4-4f99-987b-85715686aca2}</Project>
+      <Name>AgentOrders.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AgentOrders.Logic\AgentOrders.Logic.csproj">
+      <Project>{57df5642-5197-4fef-9e29-3bb7eb14a28e}</Project>
+      <Name>AgentOrders.Logic</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
