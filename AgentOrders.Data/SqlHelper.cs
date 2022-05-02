@@ -1,8 +1,10 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Data;
 using System.Linq;
+using System.Text;
 
 namespace AgentOrders.Data
 {
@@ -58,7 +60,7 @@ namespace AgentOrders.Data
             }
         }
 
-        public bool RowExists(string sqlText, SqlParameter[] parameters)
+        public bool RowExists(string sqlText, SqlParameter[] parameters = null)
         {
             using (var connection = new SqlConnection(connectionString))
             using (var statement = new SqlCommand(sqlText, connection))
@@ -97,6 +99,55 @@ namespace AgentOrders.Data
             {
                 cmd.Parameters.AddRange(parameters);
             }
+        }
+
+        public bool IsTableExist(string tableName)
+        {
+            return RowExists($"Select Top 1 id From dbo.sysobjects Where id = object_id(N'dbo.{tableName}')");
+        }
+
+        public string[] RunScript(string fileName) 
+        {
+            if (!File.Exists(fileName))
+                return new string[0];
+
+            string[] lines = File.ReadAllLines(fileName);
+            return RunScript(lines);
+        }
+
+        private string[] RunScript(string[] lines)
+        {
+            var errorList = new List<string>();
+            var sqlText = new StringBuilder();
+
+            for (int idxLine = 0; idxLine < lines.Length; idxLine++)
+            {
+                string line = lines[idxLine];
+                string ScriptLine_Trim = line.Trim();
+                bool isStatementEnd = ScriptLine_Trim.Equals("GO", StringComparison.OrdinalIgnoreCase);
+
+                if (!isStatementEnd)
+                {
+                    sqlText.AppendLine(line);
+                }
+
+                if (isStatementEnd || idxLine == lines.Length - 1)
+                {
+                    try
+                    {
+                        ExecSql(sqlText.ToString());
+                    }
+                    catch (Exception e)
+                    {
+                        errorList.Add($"ERROR in line {idxLine + 1}: {e.Message}");
+                    }
+
+                    sqlText.Clear();
+                }
+            }
+
+
+            return errorList.ToArray();
         }
     }
 }

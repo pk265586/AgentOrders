@@ -8,6 +8,7 @@ namespace AgentOrders.WebService
         protected void Application_Start()
         {
             GlobalConfiguration.Configure(WebApiConfig.Register);
+            AppConfig.Initialize();
         }
     }
 }
