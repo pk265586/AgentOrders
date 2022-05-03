@@ -1,6 +1,6 @@
 ﻿using System;
 
-using AgentOrders.Data;
+using AgentOrders.Data.Utils;
 
 namespace AgentOrders.Logic
 {

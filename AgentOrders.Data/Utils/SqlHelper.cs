@@ -6,9 +6,9 @@ using System.Data;
 using System.Linq;
 using System.Text;
 
-namespace AgentOrders.Data
+namespace AgentOrders.Data.Utils
 {
-    public class SqlHelper
+    class SqlHelper
     {
         private readonly string connectionString;
         private bool useStoredProc;

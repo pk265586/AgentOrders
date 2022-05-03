@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Data.SqlClient;
 
-namespace AgentOrders.Data
+using AgentOrders.Data.Utils;
+
+namespace AgentOrders.Data.Repository
 {
     public class AgentRepository
     {
