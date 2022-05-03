@@ -43,8 +43,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Abstract\IAgentService.cs" />
+    <Compile Include="Abstract\IOrderService.cs" />
     <Compile Include="Implementation\AgentService.cs" />
     <Compile Include="AppSettings.cs" />
+    <Compile Include="Implementation\OrderService.cs" />
     <Compile Include="LogicInitializer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
