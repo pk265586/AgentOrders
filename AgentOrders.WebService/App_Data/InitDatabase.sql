@@ -98,11 +98,10 @@ begin
   Select ORD_NUM, ORD_AMOUNT, ADVANCE_AMOUNT, ORD_DATE, CUST_CODE, AGENT_CODE, ORD_DESCRIPTION = IsNull(ORD_DESCRIPTION, '')
   From
   (
-    Select orders.ORD_NUM, orders.ORD_AMOUNT, orders.ADVANCE_AMOUNT, orders.ORD_DATE, orders.CUST_CODE, agents.AGENT_CODE, orders.ORD_DESCRIPTION, 
-           Row_Number() Over(Partition By agents.AGENT_CODE ORDER BY orders.ORD_DATE asc) as RowNumber
+    Select ORD_NUM, ORD_AMOUNT, ADVANCE_AMOUNT, ORD_DATE, CUST_CODE, AGENT_CODE, ORD_DESCRIPTION, 
+           Row_Number() Over(Partition By AGENT_CODE ORDER BY ORD_DATE asc) as RowNumber
       From ORDERS
-     Inner Join AGENTS on agents.AGENT_CODE = orders.AGENT_CODE
-     Inner Join @agentCodes codes on codes.Item = agents.AGENT_CODE
+     Inner Join @agentCodes codes on codes.Item = AGENT_CODE
   ) a
   Where a.RowNumber = @orderIndex
 end
