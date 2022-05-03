@@ -11,10 +11,12 @@ namespace AgentOrders.Data
     public class SqlHelper
     {
         private readonly string connectionString;
+        private bool useStoredProc;
 
-        public SqlHelper(string connectionString)
+        public SqlHelper(string connectionString, bool useStoredProc = true)
         {
             this.connectionString = connectionString;
+            this.useStoredProc = useStoredProc;
         }
 
         public T GetEntity<T>(string sqlText, Func<IDataReader, T> mapper)
@@ -99,55 +101,11 @@ namespace AgentOrders.Data
             {
                 cmd.Parameters.AddRange(parameters);
             }
-        }
 
-        public bool IsTableExist(string tableName)
-        {
-            return RowExists($"Select Top 1 id From dbo.sysobjects Where id = object_id(N'dbo.{tableName}')");
-        }
-
-        public string[] RunScript(string fileName) 
-        {
-            if (!File.Exists(fileName))
-                return new string[0];
-
-            string[] lines = File.ReadAllLines(fileName);
-            return RunScript(lines);
-        }
-
-        private string[] RunScript(string[] lines)
-        {
-            var errorList = new List<string>();
-            var sqlText = new StringBuilder();
-
-            for (int idxLine = 0; idxLine < lines.Length; idxLine++)
+            if (useStoredProc)
             {
-                string line = lines[idxLine];
-                string ScriptLine_Trim = line.Trim();
-                bool isStatementEnd = ScriptLine_Trim.Equals("GO", StringComparison.OrdinalIgnoreCase);
-
-                if (!isStatementEnd)
-                {
-                    sqlText.AppendLine(line);
-                }
-
-                if (isStatementEnd || idxLine == lines.Length - 1)
-                {
-                    try
-                    {
-                        ExecSql(sqlText.ToString());
-                    }
-                    catch (Exception e)
-                    {
-                        errorList.Add($"ERROR in line {idxLine + 1}: {e.Message}");
-                    }
-
-                    sqlText.Clear();
-                }
+                cmd.CommandType = CommandType.StoredProcedure;
             }
-
-
-            return errorList.ToArray();
         }
     }
 }

@@ -21,9 +21,11 @@ namespace AgentOrders.WebService.Controllers
         /// <param name="year"> A year to check. </param>
         /// <returns> The AGENT_CODE value of the agent in question </returns>
         [HttpGet]
-        public string HighestAdvance(int year)
+        public object HighestAdvance(int year)
         {
-            return "HighestAdvance - TBD";
+            var service = new AgentOrders.Logic.AgentService(); // TODO: implement DI
+            var agentCode = service.GetHighestAdvanceAgentCode(year);
+            return new { AgentCode = agentCode };
         }
 
         /// <summary>
@@ -38,7 +40,7 @@ namespace AgentOrders.WebService.Controllers
         {
             return new[]
             {
-                new OrdersByIndexResponseModel{ OrderNum = 1, Amount = 1.1M, AdvanceAmount = 1.2M, AgentCode = "aaa", CustomerCode = "bbb", OrderDate = DateTime.Now, Description = "ccc"}
+                new OrdersByIndexResponseModel { OrderNum = 1, Amount = 1.1M, AdvanceAmount = 1.2M, AgentCode = "aaa", CustomerCode = "bbb", OrderDate = DateTime.Now, Description = "ccc"}
             };
         }
 
