@@ -45,9 +45,9 @@ namespace AgentOrders.Data
                 OrderAmount = (decimal)(double)reader["ORD_AMOUNT"],
                 AdvanceAmount = (decimal)(double)reader["ADVANCE_AMOUNT"],
                 OrderDate = (DateTime)reader["ORD_DATE"],
-                CustomerCode = reader["CUST_CODE"].ToString(),
-                AgentCode = reader["AGENT_CODE"].ToString(),
-                OrderDescription = reader["ORD_DESCRIPTION"].ToString(),
+                CustomerCode = reader["CUST_CODE"].ToString().Trim(),
+                AgentCode = reader["AGENT_CODE"].ToString().Trim(),
+                OrderDescription = reader["ORD_DESCRIPTION"].ToString().Trim(),
             };
         }
 
@@ -55,12 +55,12 @@ namespace AgentOrders.Data
         {
             return new AgentModel
             {
-                Code = reader["AGENT_CODE"].ToString(),
-                Name = reader["AGENT_NAME"].ToString(),
-                WorkingArea = reader["WORKING_AREA"].ToString(),
+                Code = reader["AGENT_CODE"].ToString().Trim(),
+                Name = reader["AGENT_NAME"].ToString().Trim(),
+                WorkingArea = reader["WORKING_AREA"].ToString().Trim(),
                 Commission = (int)reader["COMMISSION"],
-                PhoneNo = reader["PHONE_NO"].ToString(),
-                Country = reader["COUNTRY"].ToString(),
+                PhoneNo = reader["PHONE_NO"].ToString().Trim(),
+                Country = reader["COUNTRY"].ToString().Trim(),
             };
         }
     }
