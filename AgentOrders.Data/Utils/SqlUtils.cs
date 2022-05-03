@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AgentOrders.Data
+namespace AgentOrders.Data.Utils
 {
-    public static class SqlUtils
+    static class SqlUtils
     {
         public static bool IsTableExist(string connectionString, string tableName)
         {

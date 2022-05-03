@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 
-namespace AgentOrders.Data
+namespace AgentOrders.Data.Utils
 {
-    public static class SqlParameterUtils
+    static class SqlParameterUtils
     {
         /// <summary>
         /// Creates parameter from list of string values.

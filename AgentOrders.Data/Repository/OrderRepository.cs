@@ -4,8 +4,9 @@ using System.Data;
 using System.Data.SqlClient;
 
 using AgentOrders.Domain;
+using AgentOrders.Data.Utils;
 
-namespace AgentOrders.Data
+namespace AgentOrders.Data.Repository
 {
     public class OrderRepository
     {

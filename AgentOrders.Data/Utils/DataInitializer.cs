@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace AgentOrders.Data
+namespace AgentOrders.Data.Utils
 {
     public class DataInitializer
     {

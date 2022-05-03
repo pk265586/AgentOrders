@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 
 using AgentOrders.Domain;
-using AgentOrders.Data;
+using AgentOrders.Data.Repository;
 using AgentOrders.Logic.Abstract;
 
 namespace AgentOrders.Logic.Implementation
