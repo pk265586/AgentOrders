@@ -106,3 +106,25 @@ begin
   Where a.RowNumber = @orderIndex
 end
 GO
+
+if object_id('GetAgentsByMinOrders') is not NULL
+  Drop Procedure GetAgentsByMinOrders
+GO
+
+Create Procedure GetAgentsByMinOrders
+  @minCount int,
+  @year int
+as
+begin
+  Select AGENTS.AGENT_CODE, AGENT_NAME, WORKING_AREA, COMMISSION, PHONE_NO, COUNTRY
+    From AGENTS
+  Inner Join
+  (
+    Select AGENT_CODE
+      From ORDERS
+     Where Year(ORD_DATE) = @year
+     Group by AGENT_CODE
+    Having Count(ORD_NUM) >= @minCount
+  ) a on a.AGENT_CODE = AGENTS.AGENT_CODE
+end
+GO

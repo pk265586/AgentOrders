@@ -13,5 +13,10 @@ namespace AgentOrders.Logic.Implementation
         {
             return new OrderRepository(AppSettings.ConnectionString).GetOrdersByIndex(agentCodes, orderIndex);
         }
+
+        public List<AgentModel> GetAgentsByMinOrders(int minCount, int year) 
+        {
+            return new OrderRepository(AppSettings.ConnectionString).GetAgentsByMinOrders(minCount, year);
+        }
     }
 }

@@ -8,5 +8,6 @@ namespace AgentOrders.Logic.Abstract
     public interface IOrderService
     {
         List<AgentOrderModel> GetOrdersByIndex(string[] agentCodes, int orderIndex);
+        List<AgentModel> GetAgentsByMinOrders(int minCount, int year);
     }
 }

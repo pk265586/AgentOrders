@@ -50,7 +50,7 @@ namespace AgentOrders.WebService.Controllers
         {
             var codesArray = agentCodes.Split(',');
             return orderService.GetOrdersByIndex(codesArray, orderIndex).
-                Select(m => ModelConvertor.ConvertOrderByIndex(m))
+                Select(m => ModelConvertor.AgentOrderToResponseModel(m))
                 .ToArray();
         }
 
@@ -64,10 +64,9 @@ namespace AgentOrders.WebService.Controllers
         [HttpGet]
         public ListByMinOrdersResponseModel[] ListByMinOrders(int minCount, int year) 
         {
-            return new[] 
-            {
-                new ListByMinOrdersResponseModel{ AgentCode = "aaa", AgentName = "bbb", PhoneNo = "123" }
-            };
+            return orderService.GetAgentsByMinOrders(minCount, year).
+                Select(m => ModelConvertor.AgentToResponseModel(m))
+                .ToArray();
         }
     }
 }
