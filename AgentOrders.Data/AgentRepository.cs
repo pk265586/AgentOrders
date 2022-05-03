@@ -15,7 +15,7 @@ namespace AgentOrders.Data
 
         public string GetHighestAdvanceAgentCode(int year)
         {
-            return sqlHelper.GetEntity("GetHighestAdvanceAgent", new SqlParameter("@year", year), reader => reader.GetString(0));
+            return sqlHelper.GetEntity("GetHighestAdvanceAgent", new SqlParameter("@year", year), reader => reader.GetString(0).Trim());
         }
     }
 }
