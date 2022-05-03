@@ -1,16 +1,11 @@
 ﻿using System;
 using System.Data.SqlClient;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AgentOrders.Data
 {
     public class AgentRepository
     {
         private readonly string connectionString;
-
         private SqlHelper sqlHelper => new SqlHelper(connectionString);
 
         public AgentRepository(string connectionString)

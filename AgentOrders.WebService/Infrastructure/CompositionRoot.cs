@@ -13,7 +13,10 @@ namespace AgentOrders.WebService.Infrastructure
         public static void Compose(HttpConfiguration config) 
         {
             var container = new UnityContainer();
-            container.RegisterType<IAgentService, AgentService>();
+
+            container.RegisterType<IAgentService, AgentService>()
+                .RegisterType<IOrderService, OrderService>();
+
             config.DependencyResolver = new UnityResolver(container);
         }
     }

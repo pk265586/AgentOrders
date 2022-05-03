@@ -64,6 +64,11 @@ INSERT INTO ORDERS VALUES (210108,'1800.00','900.00','12-04-2021','C00021','A005
 INSERT INTO ORDERS VALUES (210109,'1800.00','500.00','10-04-2021','C00021','A005','ADR');
 GO
 
+if not exists(Select name From systypes Where name = 'StringList')
+  CREATE TYPE StringList 
+    AS TABLE (Item VARCHAR(50));
+GO
+
 if object_id('GetHighestAdvanceAgent') is not NULL
   Drop Procedure GetHighestAdvanceAgent
 GO
@@ -78,5 +83,27 @@ begin
      and Month(ORD_DATE) between 1 and 3
    Group by AGENT_CODE
    Order by Sum(ADVANCE_AMOUNT) desc;
+end
+GO
+
+if object_id('GetOrdersByIndex') is not NULL
+  Drop Procedure GetOrdersByIndex
+GO
+
+Create Procedure GetOrdersByIndex
+  @agentCodes StringList READONLY,
+  @orderIndex int
+as
+begin
+  Select ORD_NUM, ORD_AMOUNT, ADVANCE_AMOUNT, ORD_DATE, CUST_CODE, AGENT_CODE, ORD_DESCRIPTION = IsNull(ORD_DESCRIPTION, '')
+  From
+  (
+    Select orders.ORD_NUM, orders.ORD_AMOUNT, orders.ADVANCE_AMOUNT, orders.ORD_DATE, orders.CUST_CODE, agents.AGENT_CODE, orders.ORD_DESCRIPTION, 
+           Row_Number() Over(Partition By agents.AGENT_CODE ORDER BY orders.ORD_DATE asc) as RowNumber
+      From ORDERS
+     Inner Join AGENTS on agents.AGENT_CODE = orders.AGENT_CODE
+     Inner Join @agentCodes codes on codes.Item = agents.AGENT_CODE
+  ) a
+  Where a.RowNumber = @orderIndex
 end
 GO

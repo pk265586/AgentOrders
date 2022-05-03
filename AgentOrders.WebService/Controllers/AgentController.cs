@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Web.Http;
 
 using AgentOrders.Logic.Abstract;
@@ -9,10 +10,12 @@ namespace AgentOrders.WebService.Controllers
     public class AgentController : ApiController
     {
         IAgentService agentService;
+        IOrderService orderService;
 
-        public AgentController(IAgentService agentService) 
+        public AgentController(IAgentService agentService, IOrderService orderService) 
         {
             this.agentService = agentService;
+            this.orderService = orderService;
         }
 
         [HttpGet]
@@ -45,10 +48,10 @@ namespace AgentOrders.WebService.Controllers
         [HttpGet]
         public OrdersByIndexResponseModel[] OrdersByIndex(string agentCodes, int orderIndex)
         {
-            return new[]
-            {
-                new OrdersByIndexResponseModel { OrderNum = 1, Amount = 1.1M, AdvanceAmount = 1.2M, AgentCode = "aaa", CustomerCode = "bbb", OrderDate = DateTime.Now, Description = "ccc"}
-            };
+            var codesArray = agentCodes.Split(',');
+            return orderService.GetOrdersByIndex(codesArray, orderIndex).
+                Select(m => ModelConvertor.ConvertOrderByIndex(m))
+                .ToArray();
         }
 
         /// <summary>
