@@ -1,14 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 using AgentOrders.Data;
+using AgentOrders.Logic.Abstract;
 
-namespace AgentOrders.Logic
+namespace AgentOrders.Logic.Implementation
 {
-    public class AgentService
+    public class AgentService : IAgentService
     {
         public string GetHighestAdvanceAgentCode(int year)
         {
