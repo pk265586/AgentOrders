@@ -1,12 +1,20 @@
 ﻿using System;
 using System.Web.Http;
 
+using AgentOrders.Logic.Abstract;
 using AgentOrders.WebService.Models;
 
 namespace AgentOrders.WebService.Controllers
 {
     public class AgentController : ApiController
     {
+        IAgentService agentService;
+
+        public AgentController(IAgentService agentService) 
+        {
+            this.agentService = agentService;
+        }
+
         [HttpGet]
         [Route("~/api/Agent/Test")]
         public string Test()
@@ -23,8 +31,7 @@ namespace AgentOrders.WebService.Controllers
         [HttpGet]
         public object HighestAdvance(int year)
         {
-            var service = new AgentOrders.Logic.AgentService(); // TODO: implement DI
-            var agentCode = service.GetHighestAdvanceAgentCode(year);
+            var agentCode = agentService.GetHighestAdvanceAgentCode(year);
             return new { AgentCode = agentCode };
         }
 
