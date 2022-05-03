@@ -6,7 +6,7 @@ namespace AgentOrders.WebService.Models
 {
     public static class ModelConvertor
     {
-        public static OrdersByIndexResponseModel ConvertOrderByIndex(AgentOrderModel source) 
+        public static OrdersByIndexResponseModel AgentOrderToResponseModel(AgentOrderModel source) 
         {
             return new OrdersByIndexResponseModel
             {
@@ -17,6 +17,16 @@ namespace AgentOrders.WebService.Models
                 CustomerCode = source.CustomerCode,
                 AgentCode = source.AgentCode,
                 Description = source.OrderDescription,
+            };
+        }
+
+        public static ListByMinOrdersResponseModel AgentToResponseModel(AgentModel source)
+        {
+            return new ListByMinOrdersResponseModel
+            {
+                AgentCode = source.Code,
+                AgentName = source.Name,
+                PhoneNo = source.PhoneNo
             };
         }
     }

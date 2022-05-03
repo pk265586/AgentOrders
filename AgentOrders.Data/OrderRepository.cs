@@ -27,6 +27,16 @@ namespace AgentOrders.Data
             return sqlHelper.GetEntityList("GetOrdersByIndex", parameters, GetAgentOrderModelByReader);
         }
 
+        public List<AgentModel> GetAgentsByMinOrders(int minCount, int year)
+        {
+            var parameters = new[]
+            {
+                new SqlParameter("@minCount", minCount),
+                new SqlParameter("@year", year)
+            };
+            return sqlHelper.GetEntityList("GetAgentsByMinOrders", parameters, GetAgentModelByReader);
+        }
+
         private AgentOrderModel GetAgentOrderModelByReader(IDataReader reader) 
         {
             return new AgentOrderModel 
@@ -35,9 +45,22 @@ namespace AgentOrders.Data
                 OrderAmount = (decimal)(double)reader["ORD_AMOUNT"],
                 AdvanceAmount = (decimal)(double)reader["ADVANCE_AMOUNT"],
                 OrderDate = (DateTime)reader["ORD_DATE"],
-                CustomerCode = (string)reader["CUST_CODE"],
-                AgentCode = (string)reader["AGENT_CODE"],
-                OrderDescription = (string)reader["ORD_DESCRIPTION"],
+                CustomerCode = reader["CUST_CODE"].ToString(),
+                AgentCode = reader["AGENT_CODE"].ToString(),
+                OrderDescription = reader["ORD_DESCRIPTION"].ToString(),
+            };
+        }
+
+        private AgentModel GetAgentModelByReader(IDataReader reader)
+        {
+            return new AgentModel
+            {
+                Code = reader["AGENT_CODE"].ToString(),
+                Name = reader["AGENT_NAME"].ToString(),
+                WorkingArea = reader["WORKING_AREA"].ToString(),
+                Commission = (int)reader["COMMISSION"],
+                PhoneNo = reader["PHONE_NO"].ToString(),
+                Country = reader["COUNTRY"].ToString(),
             };
         }
     }
