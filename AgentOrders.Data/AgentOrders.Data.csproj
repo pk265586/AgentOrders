@@ -41,9 +41,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AgentRepository.cs" />
     <Compile Include="DataInitializer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SqlHelper.cs" />
+    <Compile Include="SqlUtils.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AgentOrders.Domain\AgentOrders.Domain.csproj">

@@ -63,3 +63,20 @@ INSERT INTO ORDERS VALUES (201013,'300.00','200.00','10-02-2020','C00023','A004'
 INSERT INTO ORDERS VALUES (210108,'1800.00','900.00','12-04-2021','C00021','A005','ADR');
 INSERT INTO ORDERS VALUES (210109,'1800.00','500.00','10-04-2021','C00021','A005','ADR');
 GO
+
+if object_id('GetHighestAdvanceAgent') is not NULL
+  Drop Procedure GetHighestAdvanceAgent
+GO
+
+Create Procedure GetHighestAdvanceAgent
+  @year int
+as
+begin
+  Select Top 1 AGENT_CODE
+    From ORDERS
+   Where Year(ORD_DATE) = @year
+     and Month(ORD_DATE) between 1 and 3
+   Group by AGENT_CODE
+   Order by Sum(ADVANCE_AMOUNT) desc;
+end
+GO

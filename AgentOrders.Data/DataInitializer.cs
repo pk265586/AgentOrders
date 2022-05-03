@@ -6,10 +6,9 @@ namespace AgentOrders.Data
     {
         public void Initialize(string connectionString, string scriptFileName)
         {
-            var helper = new SqlHelper(connectionString);
-            if (!helper.IsTableExist("AGENTS"))
+            if (!SqlUtils.IsTableExist(connectionString, "AGENTS"))
             {
-                helper.RunScript(scriptFileName);
+                SqlUtils.RunScript(connectionString, scriptFileName);
             }
         }
     }
