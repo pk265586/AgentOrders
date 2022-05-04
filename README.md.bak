@@ -60,7 +60,7 @@ In case something goes wrong in data initialization script, I have also provided
 
 Some notes on the app architecture:
 I have used the following layered structure (from highest to lowest layer):
-* Presentation layer - AgentOrders.WebService. Used Asp.Net Web Api. Currently contains 2 controllers: AgentController, which is responsible for agent-related APIs, and OrderController, which is responsible for order-related APIs.
+* Presentation layer - AgentOrders.WebService. Used Asp.Net Web Api. Currently contains 2 controllers: AgentController, which is responsible for agent-related APIs and OrderController, which is responsible for order-related APIs.
 * Business logic layer - AgentOrders.Logic. Currently, the business logic layer simply forwards all calls to the DAL. Should there be any business rules, all will be implemented here.
 * Data access layer (DAL) - AgentOrders.Data. For simplicity, used simple ADO.DB classes with mapping to business objects
 * Domain layer - AgentOrders.Domain. Contains POCO classes representating business objects.

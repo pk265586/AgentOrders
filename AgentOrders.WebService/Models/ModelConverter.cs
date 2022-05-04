@@ -4,7 +4,7 @@ using AgentOrders.Domain;
 
 namespace AgentOrders.WebService.Models
 {
-    public static class ModelConvertor
+    public static class ModelConverter
     {
         public static OrdersByIndexResponseModel AgentOrderToResponseModel(AgentOrderModel source) 
         {

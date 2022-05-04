@@ -105,7 +105,7 @@
     <Compile Include="Infrastructure\CompositionRoot.cs" />
     <Compile Include="Infrastructure\UnityResolver.cs" />
     <Compile Include="Models\AgentsByMinOrdersResponseModel.cs" />
-    <Compile Include="Models\ModelConvertor.cs" />
+    <Compile Include="Models\ModelConverter.cs" />
     <Compile Include="Models\OrdersByIndexResponseModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
