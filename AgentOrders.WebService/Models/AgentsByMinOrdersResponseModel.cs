@@ -2,7 +2,7 @@
 
 namespace AgentOrders.WebService.Models
 {
-    public class ListByMinOrdersResponseModel
+    public class AgentsByMinOrdersResponseModel
     {
         public string AgentCode { get; set; }
         public string AgentName { get; set; }

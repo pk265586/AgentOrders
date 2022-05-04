@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Linq;
 using System.Web.Http;
 
 using AgentOrders.Logic.Abstract;
-using AgentOrders.WebService.Models;
 
 namespace AgentOrders.WebService.Controllers
 {
@@ -14,13 +12,6 @@ namespace AgentOrders.WebService.Controllers
         public AgentController(IAgentService agentService) 
         {
             this.agentService = agentService;
-        }
-
-        [HttpGet]
-        [Route("~/api/Agent/Test")]
-        public string Test()
-        {
-            return "Test is called!";
         }
 
         /// <summary>
