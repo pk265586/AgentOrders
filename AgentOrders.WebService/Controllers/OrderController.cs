@@ -40,7 +40,7 @@ namespace AgentOrders.WebService.Controllers
         /// <param name="year"> A year to check </param>
         /// <returns> The list of the agents in question </returns>
         [HttpGet]
-        public ListByMinOrdersResponseModel[] AgentsByMinOrders(int minCount, int year)
+        public AgentsByMinOrdersResponseModel[] AgentsByMinOrders(int minCount, int year)
         {
             return orderService.GetAgentsByMinOrders(minCount, year)
                 .Select(m => ModelConvertor.AgentToResponseModel(m))

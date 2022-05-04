@@ -20,9 +20,9 @@ namespace AgentOrders.WebService.Models
             };
         }
 
-        public static ListByMinOrdersResponseModel AgentToResponseModel(AgentModel source)
+        public static AgentsByMinOrdersResponseModel AgentToResponseModel(AgentModel source)
         {
-            return new ListByMinOrdersResponseModel
+            return new AgentsByMinOrdersResponseModel
             {
                 AgentCode = source.Code,
                 AgentName = source.Name,
