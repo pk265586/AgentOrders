@@ -14,7 +14,7 @@ GET
 /api/Agent/HighestAdvance?year=XXXX
 Response:
 {
-	"AgentCode": "string"
+    "AgentCode": "string"
 }
 ```
 2) Get list of orders, one per agent, where each item is N-th oldest order of one agent. If an agent has less than N orders, that agent is not listed.
@@ -23,15 +23,15 @@ GET
 /api/Order/OrdersByIndex?agentCodes=XXXX,YYYY,...&orderIndex=ZZZZ
 Response:
 [
-	{
-		"OrderNum": integer,
-		"Amount": decimal,
-		"AdvanceAmount": decimal,
-		"OrderDate": "yyyy-MM-ddTHH:mm:ss",
-		"CustomerCode": "string",
-		"AgentCode": "string",
-		"Description": "string"
-	}
+    {
+        "OrderNum": integer,
+        "Amount": decimal,
+        "AdvanceAmount": decimal,
+        "OrderDate": "yyyy-MM-ddTHH:mm:ss",
+        "CustomerCode": "string",
+        "AgentCode": "string",
+        "Description": "string"
+    }
 ]
 ```
 3) Get list of agents who have orders count in the given year more or equal to the given number.
@@ -40,11 +40,11 @@ GET
 /api/Order/AgentsByMinOrders?minCount=X&year=YYYY
 Response:
 [
-	{
-		"AgentCode": "string",
-		"AgentName": "string",
-		"PhoneNo": "string"
-	}
+    {
+        "AgentCode": "string",
+        "AgentName": "string",
+        "PhoneNo": "string"
+    }
 ]
 ```
 
