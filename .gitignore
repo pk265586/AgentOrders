@@ -250,3 +250,4 @@ Web/ClientModules/ClientModules.WebUI/Updates/
 Liram.Mvp.View.Tests/
 Liram.Ramplus.UI.Main/Help/Version.txt
 .idea/*
+.git.bfg-report/
